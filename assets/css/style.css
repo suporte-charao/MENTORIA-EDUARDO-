@@ -332,10 +332,10 @@ button.btn:hover svg { transform: translateX(4px); }
 .success p.redirect { margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
 .success p.redirect #countdown { color: var(--copper); font-weight: 700; font-variant-numeric: tabular-nums; }
 @media (max-width: 600px) {
-  .success a.btn-ig { display: flex; width: 100%; padding: 18px 12px; gap: 10px; font-size: 13.5px; letter-spacing: .04em; }
-  .success a.btn-ig svg:last-child { display: none; }
-}
-@media (max-width: 350px) {
-  .success { padding-left: 0; padding-right: 0; }
-  .success a.btn-ig { font-size: 13px; letter-spacing: .02em; }
+  /* Duas linhas intencionais: "Acompanhe o" / "Eduardo Charão" */
+  .success a.btn-ig { display: flex; width: 100%; padding: 14px 18px; gap: 14px; font-size: 15px; letter-spacing: .08em; }
+  .success a.btn-ig > span { text-align: left; line-height: 1.3; }
+  .success a.btn-ig .nw { display: block; }
+  .success a.btn-ig svg:first-child { width: 24px; height: 24px; flex: none; }
+  .success a.btn-ig svg:last-child { display: block; margin-left: auto; }
 }

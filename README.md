@@ -16,6 +16,12 @@ supabase/schema.sql      ← tabela + RLS (rodar no Supabase)
 .htaccess                ← HTTPS e cache na Hostinger
 ```
 
+## Cache
+
+O `.htaccess` guarda CSS e JS por 1 semana no navegador. Ao alterar qualquer arquivo em
+`assets/css` ou `assets/js`, atualize o `?v=` nos links do `index.html` (ex.: `?v=202609221530`),
+senão quem já visitou continua vendo a versão antiga.
+
 ## Rodar localmente
 
 ```bash
