@@ -45,6 +45,12 @@
     if (e.target.id === 'consent' && e.target.checked) document.getElementById('consentWrap').classList.remove('invalid');
     updateProgress();
   });
+  // Aponta o erro assim que a pessoa sai do campo (só se já digitou algo)
+  form.addEventListener('focusout', e => {
+    const f = e.target.closest('[data-req]');
+    if (!f || f.dataset.group || !e.target.value.trim()) return;
+    f.classList.toggle('invalid', !isValid(f));
+  });
   form.addEventListener('change', updateProgress);
   form.addEventListener('submit', async e => {
     e.preventDefault();
