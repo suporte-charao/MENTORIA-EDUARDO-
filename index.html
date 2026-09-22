@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('fx');</script>
 </head>
 <body>
 
@@ -18,9 +19,9 @@
 
 <main class="container">
   <section class="hero">
-    <div>
+    <div class="hero-copy">
       <div class="label">Programa de Aceleração e Implementação</div>
-      <h1>Método <span>Charão.</span></h1>
+      <h1><span class="ln"><span>Método</span></span> <span class="ln"><span class="c">Charão.</span></span></h1>
       <p class="tagline">Um programa que acelera a gestão do seu negócio.</p>
       <p class="lead">Tudo o que J. Eduardo Charão implementou em 19 anos de Grupo Charão, organizado em um método para você aplicar na sua empresa.</p>
       <div class="cta-box">
@@ -37,20 +38,20 @@
   </section>
 
   <section class="chapter" aria-label="O próximo capítulo">
-    <div class="label">O próximo capítulo</div>
-    <p class="chapter-title">Programa de Aceleração <br>e&nbsp;Implementação.</p>
-    <p class="chapter-text">Transformar cartilhas construídas na prática em caminhos que outras pessoas possam adaptar à própria realidade.</p>
-    <p class="chapter-accent">Conhecimentos de negócios e técnicos.</p>
+    <div class="label" data-reveal>O próximo capítulo</div>
+    <p class="chapter-title" data-reveal style="--d:.08s">Programa de Aceleração <br>e&nbsp;Implementação.</p>
+    <p class="chapter-text" data-reveal style="--d:.16s">Transformar cartilhas construídas na prática em caminhos que outras pessoas possam adaptar à própria realidade.</p>
+    <p class="chapter-accent" data-reveal style="--d:.24s">Conhecimentos de negócios e técnicos.</p>
   </section>
 
   <section class="why" aria-label="Por que preencher">
-    <div><div class="num">01</div><b>19 anos de prática.</b><p>Não é teoria: é o que foi implementado e testado na gestão do Grupo Charão.</p></div>
-    <div><div class="num">02</div><b>Você é chamado primeiro.</b><p>Quem faz a pré-inscrição recebe o convite para fazer parte do programa antes da abertura oficial.</p></div>
-    <div><div class="num">03</div><b>Informações confidenciais.</b><p>Seus dados são usados apenas pela equipe do programa.</p></div>
+    <div data-reveal><div class="num">01</div><b>19 anos de prática.</b><p>Não é teoria: é o que foi implementado e testado na gestão do Grupo Charão.</p></div>
+    <div data-reveal style="--d:.12s"><div class="num">02</div><b>Você é chamado primeiro.</b><p>Quem faz a pré-inscrição recebe o convite para fazer parte do programa antes da abertura oficial.</p></div>
+    <div data-reveal style="--d:.24s"><div class="num">03</div><b>Informações confidenciais.</b><p>Seus dados são usados apenas pela equipe do programa.</p></div>
   </section>
 
   <section class="form-wrap" id="aplicacao" aria-label="Formulário">
-    <div class="form-head">
+    <div class="form-head" data-reveal>
       <div>
         <div class="label">Pré-inscrição · cerca de 4 minutos</div>
         <h2>Faça sua <span>pré-inscrição.</span></h2>
@@ -61,10 +62,10 @@
       <span class="progress-label" id="progressLabel">0% concluído</span>
     </div>
 
-    <div class="card">
+    <div class="card" data-reveal style="--d:.1s">
       <form id="form" novalidate>
         <p class="req-note">Todos os campos são obrigatórios <span>*</span></p>
-        <fieldset>
+        <fieldset data-line>
           <legend><span class="n">01</span> Quem é você</legend>
           <div class="field" data-req>
             <label class="lbl" for="nome">Nome completo <span class="req">*</span></label>
@@ -138,7 +139,7 @@
           </div>
         </fieldset>
 
-        <fieldset>
+        <fieldset data-line>
           <legend><span class="n">02</span> O momento da sua empresa</legend>
           <div class="field" data-req data-group="faturamento">
             <label class="lbl">Faturamento mensal <span class="req">*</span></label>
@@ -163,7 +164,7 @@
           </div>
         </fieldset>
 
-        <fieldset>
+        <fieldset data-line>
           <legend><span class="n">03</span> O que trava o seu crescimento</legend>
           <div class="field" data-req>
             <label class="lbl" for="problemas">Quais problemas você encontra hoje na gestão da sua empresa? <span class="req">*</span></label>
@@ -214,15 +215,16 @@
 
 <footer>
   <div class="container logos">
-    <img class="l1" src="assets/img/logo-charao-consultoria.webp" width="560" height="103" loading="lazy" decoding="async" alt="Charão Consultoria">
-    <img class="l2" src="assets/img/logo-charao-tributario.webp" width="420" height="133" loading="lazy" decoding="async" alt="Charão Tributário">
-    <img class="l3" src="assets/img/logo-charao-educacional.webp" width="520" height="115" loading="lazy" decoding="async" alt="Charão Educacional">
+    <img data-reveal class="l1" src="assets/img/logo-charao-consultoria.webp" width="560" height="103" loading="lazy" decoding="async" alt="Charão Consultoria">
+    <img data-reveal style="--d:.1s" class="l2" src="assets/img/logo-charao-tributario.webp" width="420" height="133" loading="lazy" decoding="async" alt="Charão Tributário">
+    <img data-reveal style="--d:.2s" class="l3" src="assets/img/logo-charao-educacional.webp" width="520" height="115" loading="lazy" decoding="async" alt="Charão Educacional">
   </div>
-  <img class="stripe" src="assets/img/faixa.webp" width="1600" height="36" loading="lazy" decoding="async" alt="">
+  <img data-line class="stripe" src="assets/img/faixa.webp" width="1600" height="36" loading="lazy" decoding="async" alt="">
 </footer>
 
 <script src="assets/js/config.js"></script>
 <script src="assets/js/inscricao.js"></script>
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/efeitos.js" defer></script>
 </body>
 </html>

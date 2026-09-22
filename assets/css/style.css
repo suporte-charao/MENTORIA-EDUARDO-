@@ -78,7 +78,7 @@
     margin: clamp(14px, 2.4vh, 26px) 0 clamp(16px, 2.6vh, 28px);
     text-transform: uppercase;
   }
-  h1 span { color: var(--copper); }
+  h1 .c { color: var(--copper); }
   .tagline { font-size: clamp(22px, 2.4vw, 32px); font-weight: 700; line-height: 1.25; letter-spacing: -.02em; margin: -8px 0 22px; max-width: 26ch; color: var(--ink); }
   .lead { font-size: clamp(17px, 1.6vw, 21px); line-height: 1.55; color: var(--ink-soft); max-width: 40ch; margin: 0 0 clamp(20px, 3.5vh, 34px); font-weight: 400; }
   .rule { width: 120px; height: 2px; background: var(--copper); border: 0; margin: 0 0 30px; }
@@ -231,3 +231,63 @@
 /* ---------- Envio ---------- */
 .btn[disabled] { opacity: .6; cursor: progress; }
 .form-error { margin: 14px 0 0; color: #E8836B; font-size: 15px; font-weight: 600; }
+
+/* ==========================================================
+   Efeitos de rolagem
+   Só valem com .fx (definida no <head> quando o usuário não
+   pediu movimento reduzido). Tudo anima transform/opacity.
+   ========================================================== */
+:root { --ease: cubic-bezier(.2, .7, .15, 1); }
+h1 .ln { display: inline-block; overflow: hidden; vertical-align: top; padding: .14em .02em .04em; margin: -.14em -.02em -.04em; }
+h1 .ln > span { display: inline-block; }
+
+/* Hero: entrada orquestrada no carregamento */
+@keyframes fx-up   { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+@keyframes fx-rise { from { transform: translateY(108%); } to { transform: none; } }
+@keyframes fx-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes fx-photo { from { opacity: 0; transform: translateY(28px) scale(.97); } to { opacity: 1; transform: none; } }
+.fx .hero-copy > * { animation: fx-up .9s var(--ease) both; }
+.fx .hero-copy > h1 { animation: none; }
+.fx .hero-copy > :nth-child(1) { animation-delay: .05s; }
+.fx .hero-copy > :nth-child(3) { animation-delay: .5s; }
+.fx .hero-copy > :nth-child(4) { animation-delay: .58s; }
+.fx .hero-copy > :nth-child(5) { animation-delay: .66s; }
+.fx .hero-copy > :nth-child(6) { animation-delay: .8s; }
+.fx .hero-copy > :nth-child(7) { animation-delay: .86s; }
+.fx .hero-copy > :nth-child(8) { animation-delay: .92s; }
+.fx h1 .ln > span { animation: fx-rise 1s var(--ease) both; animation-delay: .15s; }
+.fx h1 .ln + .ln > span { animation-delay: .27s; }
+.fx .hero .label::before { transform-origin: left; animation: fx-draw .9s var(--ease) .1s both; }
+.fx .hero .rule { transform-origin: left; animation: fx-draw 1.1s var(--ease) .8s both; }
+.fx .photo { animation: fx-photo 1.2s var(--ease) .35s both; }
+
+/* Parallax da foto: ela fica para trás enquanto o texto sobe */
+@supports (animation-timeline: view()) {
+  @keyframes fx-drift { from { transform: none; } to { transform: translateY(14%); } }
+  .fx .photo img { animation: fx-drift linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  @keyframes fx-glow { from { opacity: 1; transform: none; } to { opacity: .2; transform: translateY(-10%) scale(1.15); } }
+  .fx .photo::before { animation: fx-glow linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+}
+
+/* Revelação ao entrar na tela */
+.fx [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease) var(--d, 0s), transform .9s var(--ease) var(--d, 0s); }
+.fx [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* Linhas de cobre sendo traçadas */
+.fx .label[data-reveal]::before { transform: scaleX(0); transform-origin: left; transition: transform 1s var(--ease) calc(var(--d, 0s) + .2s); }
+.fx .label[data-reveal].is-in::before { transform: scaleX(1); }
+.why > div { position: relative; }
+.why > div::before { content: ""; position: absolute; top: -1px; left: 0; width: 56px; height: 1px; background: var(--copper); }
+.fx .why > div::before { transform: scaleX(0); transform-origin: left; transition: transform 1.1s var(--ease) calc(var(--d, 0s) + .25s); }
+.fx .why > div.is-in::before { transform: scaleX(1); }
+.fx .why .num { display: inline-block; opacity: 0; transform: translateY(12px); transition: opacity .8s var(--ease) calc(var(--d, 0s) + .15s), transform .8s var(--ease) calc(var(--d, 0s) + .15s); }
+.fx .why > div.is-in .num { opacity: 1; transform: none; }
+.fx [data-line] legend::after { transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease) .15s; }
+.fx [data-line].is-in legend::after { transform: scaleX(1); }
+.fx .stripe[data-line] { transform: scaleX(0); transition: transform 1.4s var(--ease); }
+.fx .stripe[data-line].is-in { transform: scaleX(1); }
+
+/* Microinterações dos botões */
+.btn svg { transition: transform .35s var(--ease); }
+a.btn.cta:hover svg { transform: translateY(3px); }
+button.btn:hover svg { transform: translateX(4px); }
