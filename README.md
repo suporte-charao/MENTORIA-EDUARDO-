@@ -24,11 +24,20 @@ senão quem já visitou continua vendo a versão antiga.
 
 ## Rodar localmente
 
+Requer Node.js. Na primeira vez:
+
 ```bash
-python -m http.server 8080
+npm install
 ```
 
-Abra http://localhost:8080. Sem Supabase configurado, o envio só aparece no console do navegador.
+Depois:
+
+```bash
+npm run dev
+```
+
+Abre http://localhost:8080 e recarrega a página sozinho a cada arquivo salvo.
+O `package.json` serve só para o ambiente de desenvolvimento; o site publicado continua sendo HTML/CSS/JS puros (não subir `node_modules/`). Sem Supabase configurado, o envio só aparece no console do navegador.
 
 ## Ligar o Supabase
 
