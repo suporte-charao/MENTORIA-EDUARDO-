@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Método Charão — Programa de Aceleração e Implementação | J. Eduardo Charão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="container top">
+  <img src="assets/img/logo-charao-educacional-topo.webp" alt="Charão Educacional">
+  <img class="grupo" src="assets/img/logo-grupo-charao.webp" alt="Grupo Charão">
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div>
+      <div class="label">Programa de Aceleração e Implementação</div>
+      <h1>Método <span>Charão.</span></h1>
+      <p class="tagline">Um programa que acelera a gestão do seu negócio.</p>
+      <p class="lead">Tudo o que J. Eduardo Charão implementou em 19 anos de Grupo Charão, organizado em um método para você aplicar na sua empresa.</p>
+      <div class="cta-box">
+        <p class="cta-text">Tem interesse em fazer parte do programa e aprender diretamente com o J. Eduardo? Faça sua pré-inscrição e seja direcionado para os próximos passos.</p>
+        <a class="btn cta" href="#aplicacao">Fazer minha pré-inscrição
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <hr class="rule">
+      <p class="quote"><span class="q">“</span>Eu decidi compartilhar toda minha experiência e jornada empresarial para acelerar empresas contábeis.<span class="q">”</span></p>
+      <div class="sign">J. Eduardo Charão</div>
+    </div>
+    <div class="photo"><img src="assets/img/j-eduardo-charao.webp" alt="J. Eduardo Charão"></div>
+  </section>
+
+  <section class="chapter" aria-label="O próximo capítulo">
+    <div class="label">O próximo capítulo</div>
+    <p class="chapter-title">Programa de Aceleração <br>e&nbsp;Implementação.</p>
+    <p class="chapter-text">Transformar cartilhas construídas na prática em caminhos que outras pessoas possam adaptar à própria realidade.</p>
+    <p class="chapter-accent">Conhecimentos de negócios e técnicos.</p>
+  </section>
+
+  <section class="why" aria-label="Por que preencher">
+    <div><div class="num">01</div><b>19 anos de prática.</b><p>Não é teoria: é o que foi implementado e testado na gestão do Grupo Charão.</p></div>
+    <div><div class="num">02</div><b>Você é chamado primeiro.</b><p>Quem faz a pré-inscrição recebe o convite para fazer parte do programa antes da abertura oficial.</p></div>
+    <div><div class="num">03</div><b>Informações confidenciais.</b><p>Seus dados são usados apenas pela equipe do programa.</p></div>
+  </section>
+
+  <section class="form-wrap" id="aplicacao" aria-label="Formulário">
+    <div class="form-head">
+      <div>
+        <div class="label">Pré-inscrição · cerca de 4 minutos</div>
+        <h2>Faça sua <span>pré-inscrição.</span></h2>
+      </div>
+      <span class="progress-label" id="progressLabel">0% concluído</span>
+    </div>
+    <div class="bar" aria-hidden="true"><span id="bar"></span></div>
+
+    <div class="card">
+      <form id="form" novalidate>
+        <p class="req-note">Todos os campos são obrigatórios <span>*</span></p>
+        <fieldset>
+          <legend><span class="n">01</span> Quem é você</legend>
+          <div class="field" data-req>
+            <label class="lbl" for="nome">Nome completo <span class="req">*</span></label>
+            <input type="text" id="nome" name="nome" autocomplete="name" placeholder="Seu nome e sobrenome">
+            <div class="err">Informe seu nome completo.</div>
+          </div>
+          <div class="row">
+            <div class="field" data-req>
+              <label class="lbl" for="telefone">Telefone / WhatsApp <span class="req">*</span></label>
+              <input type="tel" id="telefone" name="telefone" autocomplete="tel" inputmode="numeric" placeholder="(92) 90000-0000">
+              <div class="err">Informe um telefone válido com DDD.</div>
+            </div>
+            <div class="field" data-req>
+              <label class="lbl" for="email">E-mail <span class="req">*</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@empresa.com.br">
+              <div class="err">Informe um e-mail válido.</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field" data-req>
+              <label class="lbl" for="empresa">Empresa <span class="req">*</span></label>
+              <input type="text" id="empresa" name="empresa" autocomplete="organization" placeholder="Nome da sua empresa">
+              <div class="err">Informe o nome da empresa.</div>
+            </div>
+            <div class="field" data-req>
+              <label class="lbl" for="cargo">Cargo <span class="req">*</span></label>
+              <input type="text" id="cargo" name="cargo" autocomplete="organization-title" placeholder="Ex.: sócio, diretor, gestor">
+              <div class="err">Informe seu cargo.</div>
+            </div>
+          </div>
+          <div class="row city">
+            <div class="field" data-req>
+              <label class="lbl" for="cidade">Cidade <span class="req">*</span></label>
+              <input type="text" id="cidade" name="cidade" autocomplete="address-level2" placeholder="Sua cidade">
+              <div class="err">Informe sua cidade.</div>
+            </div>
+            <div class="field" data-req>
+              <label class="lbl" for="estado">Estado <span class="req">*</span></label>
+              <select id="estado" name="estado" autocomplete="address-level1" required>
+                <option value="" disabled selected>Selecione</option>
+                <option value="AC">AC</option>
+                <option value="AL">AL</option>
+                <option value="AP">AP</option>
+                <option value="AM">AM</option>
+                <option value="BA">BA</option>
+                <option value="CE">CE</option>
+                <option value="DF">DF</option>
+                <option value="ES">ES</option>
+                <option value="GO">GO</option>
+                <option value="MA">MA</option>
+                <option value="MT">MT</option>
+                <option value="MS">MS</option>
+                <option value="MG">MG</option>
+                <option value="PA">PA</option>
+                <option value="PB">PB</option>
+                <option value="PR">PR</option>
+                <option value="PE">PE</option>
+                <option value="PI">PI</option>
+                <option value="RJ">RJ</option>
+                <option value="RN">RN</option>
+                <option value="RS">RS</option>
+                <option value="RO">RO</option>
+                <option value="RR">RR</option>
+                <option value="SC">SC</option>
+                <option value="SP">SP</option>
+                <option value="SE">SE</option>
+                <option value="TO">TO</option>
+              </select>
+              <div class="err">Selecione o estado.</div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="n">02</span> O momento da sua empresa</legend>
+          <div class="field" data-req data-group="faturamento">
+            <label class="lbl">Faturamento mensal <span class="req">*</span></label>
+            <div class="chips" role="radiogroup" aria-label="Faturamento mensal">
+              <label class="chip"><input type="radio" name="faturamento" value="Abaixo de R$ 300 mil"><span>Abaixo de<br>R$&nbsp;300 mil</span></label>
+              <label class="chip"><input type="radio" name="faturamento" value="R$ 300 mil a R$ 500 mil"><span>R$&nbsp;300 mil a<br>R$&nbsp;500 mil</span></label>
+              <label class="chip"><input type="radio" name="faturamento" value="R$ 500 mil a R$ 1 milhão"><span>R$&nbsp;500 mil a<br>R$&nbsp;1 milhão</span></label>
+              <label class="chip"><input type="radio" name="faturamento" value="Acima de R$ 1 milhão"><span>Acima de<br>R$&nbsp;1 milhão</span></label>
+            </div>
+            <div class="err">Selecione a faixa de faturamento.</div>
+          </div>
+          <div class="field" data-req data-group="funcionarios">
+            <label class="lbl">Número de funcionários <span class="req">*</span></label>
+            <div class="chips five" role="radiogroup" aria-label="Número de funcionários">
+              <label class="chip"><input type="radio" name="funcionarios" value="0 a 10"><span>0 a 10</span></label>
+              <label class="chip"><input type="radio" name="funcionarios" value="11 a 20"><span>11 a 20</span></label>
+              <label class="chip"><input type="radio" name="funcionarios" value="21 a 40"><span>21 a 40</span></label>
+              <label class="chip"><input type="radio" name="funcionarios" value="41 a 60"><span>41 a 60</span></label>
+              <label class="chip"><input type="radio" name="funcionarios" value="Acima de 60"><span>Acima de 60</span></label>
+            </div>
+            <div class="err">Selecione o número de funcionários.</div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="n">03</span> O que trava o seu crescimento</legend>
+          <div class="field" data-req>
+            <label class="lbl" for="problemas">Quais problemas você encontra hoje na gestão da sua empresa? <span class="req">*</span></label>
+            <p class="hint">Pense em processos, equipe, clientes, margem, prazos, rotina do dono…</p>
+            <textarea id="problemas" name="problemas" maxlength="1200" placeholder="Conte com suas palavras"></textarea>
+            <div class="count"><span data-count-for="problemas">0</span>/1200</div>
+            <div class="err">Conte um pouco sobre os problemas de gestão.</div>
+          </div>
+          <div class="field" data-req>
+            <label class="lbl" for="aprender">O que você precisa aprender comigo para acelerar seus resultados? <span class="req">*</span></label>
+            <p class="hint">O que, se você dominasse amanhã, mudaria o jogo da sua empresa?</p>
+            <textarea id="aprender" name="aprender" maxlength="1200" placeholder="Conte com suas palavras"></textarea>
+            <div class="count"><span data-count-for="aprender">0</span>/1200</div>
+            <div class="err">Conte o que você precisa aprender.</div>
+          </div>
+          <div class="field" data-req>
+            <label class="lbl" for="dificuldades">Quais são as suas maiores dificuldades hoje? <span class="req">*</span></label>
+            <p class="hint">Pode ser na empresa, na liderança ou na sua própria rotina como empresário.</p>
+            <textarea id="dificuldades" name="dificuldades" maxlength="1200" placeholder="Conte com suas palavras"></textarea>
+            <div class="count"><span data-count-for="dificuldades">0</span>/1200</div>
+            <div class="err">Conte quais são suas maiores dificuldades.</div>
+          </div>
+        </fieldset>
+
+        <label class="consent" id="consentWrap">
+          <input type="checkbox" id="consent">
+          <span>Autorizo a equipe do J. Eduardo Charão a entrar em contato por telefone, WhatsApp e e-mail sobre o Programa de Aceleração e Implementação do Método Charão.</span>
+        </label>
+
+        <button type="submit" class="btn">
+          Enviar minha pré-inscrição
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="form-error" id="formError" role="alert" hidden>Não conseguimos enviar agora. Verifique sua conexão e tente de novo.</p>
+        <p class="fine">Suas informações são confidenciais.</p>
+      </form>
+
+      <div class="success" id="success" role="status" aria-live="polite">
+        <div class="check"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#D08C3C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="label" style="justify-content:center">Pré-inscrição confirmada</div>
+        <h3 style="margin-top:18px">Obrigado, <span id="firstName"></span>.</h3>
+        <p>Vou ler com atenção o que você escreveu. Suas respostas me ajudam a entender os desafios reais de quem quer acelerar a gestão do próprio negócio.</p>
+        <p>Você receberá o convite para fazer parte do Programa de Aceleração e Implementação do Método Charão antes da abertura oficial.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container logos">
+    <img class="l1" src="assets/img/logo-charao-consultoria.webp" alt="Charão Consultoria">
+    <img class="l2" src="assets/img/logo-charao-tributario.webp" alt="Charão Tributário">
+    <img class="l3" src="assets/img/logo-charao-educacional.webp" alt="Charão Educacional">
+  </div>
+  <img class="stripe" src="assets/img/faixa.webp" alt="">
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/inscricao.js"></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
