@@ -40,9 +40,9 @@ db.exec(`
 
 const insert = db.prepare(`
   INSERT INTO inscricoes (id, nome, telefone, email, empresa, cargo, cidade, estado,
-    faturamento, funcionarios, problemas, aprender, dificuldades)
+    faturamento, funcionarios, problemas, aprender, dificuldades, consentimento)
   VALUES (@id, @nome, @telefone, @email, @empresa, @cargo, @cidade, @estado,
-    @faturamento, @funcionarios, @problemas, @aprender, @dificuldades)
+    @faturamento, @funcionarios, @problemas, @aprender, @dificuldades, @consentimento)
 `)
 
 const updateCrm = db.prepare(`
@@ -50,7 +50,7 @@ const updateCrm = db.prepare(`
 `)
 
 export function saveInscricao(inscricao) {
-  insert.run(inscricao)
+  insert.run({ ...inscricao, consentimento: inscricao.consentimento ? 1 : 0 })
   return inscricao
 }
 
