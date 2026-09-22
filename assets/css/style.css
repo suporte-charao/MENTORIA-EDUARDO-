@@ -327,8 +327,15 @@ button.btn:hover svg { transform: translateX(4px); }
 }
 
 /* ---------- Sucesso: Instagram ---------- */
-.success a.btn-ig { width: auto; display: inline-flex; margin-top: 26px; text-decoration: none; padding: 18px 28px; font-size: 15px; letter-spacing: .1em; text-transform: none; }
-.success a.btn-ig span { text-transform: uppercase; }
-.success a.btn-ig .nw { text-transform: none; letter-spacing: .02em; }
+.success a.btn-ig { width: auto; display: inline-flex; margin-top: 26px; text-decoration: none; padding: 18px 28px; font-size: 15px; }
+.success a.btn-ig:hover svg:last-child { transform: translateX(4px); }
 .success p.redirect { margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
 .success p.redirect #countdown { color: var(--copper); font-weight: 700; font-variant-numeric: tabular-nums; }
+@media (max-width: 600px) {
+  .success a.btn-ig { display: flex; width: 100%; padding: 18px 12px; gap: 10px; font-size: 13.5px; letter-spacing: .04em; }
+  .success a.btn-ig svg:last-child { display: none; }
+}
+@media (max-width: 350px) {
+  .success { padding-left: 0; padding-right: 0; }
+  .success a.btn-ig { font-size: 13px; letter-spacing: .02em; }
+}
