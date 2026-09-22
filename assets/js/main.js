@@ -85,6 +85,22 @@
     const s = document.getElementById('success');
     s.classList.add('show');
     s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    irParaInstagram();
   });
+
+  // Depois da confirmação, leva ao Instagram do J. Eduardo com contagem visível
+  function irParaInstagram() {
+    const link = document.getElementById('igLink');
+    const nota = document.getElementById('redirectNote');
+    const cont = document.getElementById('countdown');
+    let restante = 10;
+    nota.hidden = false;
+    const t = setInterval(() => {
+      restante -= 1;
+      cont.textContent = restante;
+      if (restante <= 0) { clearInterval(t); window.location.href = link.href; }
+    }, 1000);
+    link.addEventListener('click', () => clearInterval(t));
+  }
   updateProgress();
 })();

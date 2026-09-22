@@ -325,3 +325,10 @@ button.btn:hover svg { transform: translateX(4px); }
   .btn, a.btn.cta { font-size: 14px; letter-spacing: .04em; padding: 18px 14px; gap: 10px; }
   .card { padding: 22px 16px; }
 }
+
+/* ---------- Sucesso: Instagram ---------- */
+.success a.btn-ig { width: auto; display: inline-flex; margin-top: 26px; text-decoration: none; padding: 18px 28px; font-size: 15px; letter-spacing: .1em; text-transform: none; }
+.success a.btn-ig span { text-transform: uppercase; }
+.success a.btn-ig .nw { text-transform: none; letter-spacing: .02em; }
+.success p.redirect { margin-top: 14px; font-size: 13px; color: var(--ink-mute); }
+.success p.redirect #countdown { color: var(--copper); font-weight: 700; font-variant-numeric: tabular-nums; }
