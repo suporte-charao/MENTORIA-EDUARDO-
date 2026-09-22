@@ -1,0 +1,20 @@
+{
+  "name": "metodo-charao-api",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "API de pré-inscrição — Método Charão | Charão Educacional",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "test": "node --test src/"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.11.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0"
+  }
+}
