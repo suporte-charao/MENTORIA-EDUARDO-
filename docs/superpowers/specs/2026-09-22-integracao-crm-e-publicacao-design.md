@@ -103,7 +103,7 @@ CRM_FORWARD_ENABLED=true
 ### Site do grupo (`SITE-CHARAO-main`)
 
 - Trocar o `href="#contato"` do botão "Conheça a Charão Educacional" por
-  `https://grupocharao.com.br/charaoeducacional/eduardocharao/` (mesma aba).
+  `https://grupocharao.com.br/charaoeducacional/eduardocharao/` via `ctaHref` (abre em nova aba, mesma convenção já usada para a Mentoria Tributária).
 - `npm run build` e resubir `out/` no `public_html` conforme `DEPLOY.md`. A pasta
   `charaoeducacional/` não é gerada pelo Next, então o build não a sobrescreve; documentar isso no `DEPLOY.md`.
 
