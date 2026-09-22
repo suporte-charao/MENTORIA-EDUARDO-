@@ -291,3 +291,37 @@ h1 .ln > span { display: inline-block; }
 .btn svg { transition: transform .35s var(--ease); }
 a.btn.cta:hover svg { transform: translateY(3px); }
 button.btn:hover svg { transform: translateX(4px); }
+
+/* ==========================================================
+   Ajustes de celular
+   ========================================================== */
+.btn .nw { white-space: nowrap; }
+.consent input { width: 20px; height: 20px; margin-top: 1px; }
+@media (max-width: 600px) {
+  /* Botões em uma linha só */
+  .btn, a.btn.cta { font-size: 15px; letter-spacing: .08em; padding: 19px 18px; }
+  .btn .opt { display: none; }
+  /* Logos do topo cabem até em 320px */
+  .top { gap: 16px; }
+  .top img { width: min(52vw, 210px); }
+  .top img.grupo { width: min(30vw, 130px); }
+  /* Consentimento: alvo de toque maior */
+  .consent { padding: 6px 0; }
+  .consent input { width: 24px; height: 24px; margin-top: 0; }
+}
+/* Funcionários: 3 + 2 ocupando a linha toda */
+@media (max-width: 720px) {
+  .chips.five { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .chips.five .chip { grid-column: span 2; }
+  .chips.five .chip:nth-child(n+4) { grid-column: span 3; }
+}
+/* Telas estreitas: 2 + 2 + 1 com o último na largura toda */
+@media (max-width: 380px) {
+  .chips.five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chips.five .chip, .chips.five .chip:nth-child(n+4) { grid-column: auto; }
+  .chips.five .chip:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 350px) {
+  .btn, a.btn.cta { font-size: 14px; letter-spacing: .04em; padding: 18px 14px; gap: 10px; }
+  .card { padding: 22px 16px; }
+}
