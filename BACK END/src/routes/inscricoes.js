@@ -10,6 +10,7 @@ const LIMITE_MSG = 'Muitas tentativas. Aguarde alguns minutos e tente novamente.
 router.post('/', (req, res) => {
   // Honeypot: humanos nunca preenchem. Responde sucesso falso sem gravar.
   if (req.body?.website || req.body?._hp) {
+    console.warn('[inscricoes] honeypot acionado', { ip: req.ip })
     return res.status(201).json({ id: randomUUID(), message: 'Pré-inscrição recebida.' })
   }
 

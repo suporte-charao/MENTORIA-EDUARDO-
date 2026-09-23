@@ -45,10 +45,23 @@ test('buildCrmPayload mapeia campos e monta notas', () => {
   ].join('\n'))
 })
 
-test('notas são truncadas em 1900 caracteres', () => {
+test('resposta longa é truncada por campo, sem afetar as demais', () => {
   const p = buildCrmPayload({ ...insc, problemas: 'x'.repeat(3000) }, cfg)
-  assert.equal(p.notas.length, 1900)
-  assert.ok(p.notas.endsWith('…'))
+  assert.ok(p.notas.includes('Quer aprender: Indicadores'))
+  assert.ok(p.notas.includes('Dificuldades: Time'))
+})
+
+test('notas com as três respostas longas ficam dentro do corte de segurança de 1900', () => {
+  const p = buildCrmPayload({
+    ...insc,
+    problemas: 'x'.repeat(3000),
+    aprender: 'y'.repeat(3000),
+    dificuldades: 'z'.repeat(3000),
+  }, cfg)
+  assert.ok(p.notas.length <= 1900)
+  assert.ok(p.notas.includes('Problemas:'))
+  assert.ok(p.notas.includes('Quer aprender:'))
+  assert.ok(p.notas.includes('Dificuldades:'))
 })
 
 test('getCrmConfig lê env e parseia CSV', () => {
@@ -85,6 +98,7 @@ test('forwardToCrm envia Bearer e trata 201 created', async () => {
   const r = await forwardToCrm(insc, { config: cfg, fetchImpl })
   assert.equal(captured.url, cfg.url)
   assert.equal(captured.opts.headers.Authorization, 'Bearer s3cr3t')
+  assert.equal(captured.opts.redirect, 'error')
   assert.equal(JSON.parse(captured.opts.body).origemLead, 'Método Charão Eduardo')
   assert.deepEqual(r, { ok: true, action: 'created', leadId: 'L1' })
 })

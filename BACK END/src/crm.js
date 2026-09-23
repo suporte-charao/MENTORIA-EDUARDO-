@@ -1,4 +1,5 @@
-const NOTAS_MAX = 1900
+const NOTAS_MAX = 1900 // corte de segurança final do texto completo enviado ao CRM
+const RESPOSTA_MAX = 550 // corte por resposta longa (problemas/aprender/dificuldades), antes do corte final
 
 export function getCrmConfig(env = process.env) {
   return {
@@ -11,17 +12,24 @@ export function getCrmConfig(env = process.env) {
   }
 }
 
+// Corta por code point (não por code unit) para nunca partir um par substituto (emoji etc.).
+function cortarTexto(texto, max) {
+  const chars = Array.from(texto)
+  if (chars.length <= max) return texto
+  return chars.slice(0, max).join('') + '…'
+}
+
 function montarNotas(i) {
   const linhas = [
     `Cidade/UF: ${i.cidade}/${i.estado}`,
     `Faturamento: ${i.faturamento}`,
     `Funcionários: ${i.funcionarios}`,
-    `Problemas: ${i.problemas}`,
-    `Quer aprender: ${i.aprender}`,
-    `Dificuldades: ${i.dificuldades}`,
+    `Problemas: ${cortarTexto(i.problemas, RESPOSTA_MAX)}`,
+    `Quer aprender: ${cortarTexto(i.aprender, RESPOSTA_MAX)}`,
+    `Dificuldades: ${cortarTexto(i.dificuldades, RESPOSTA_MAX)}`,
   ]
   const texto = linhas.join('\n')
-  return texto.length > NOTAS_MAX ? texto.slice(0, NOTAS_MAX - 1) + '…' : texto
+  return texto.length > NOTAS_MAX ? cortarTexto(texto, NOTAS_MAX - 1) : texto
 }
 
 export function buildCrmPayload(inscricao, config) {
@@ -49,6 +57,7 @@ export async function forwardToCrm(inscricao, { config = getCrmConfig(), timeout
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${config.secret}` },
       body: JSON.stringify(buildCrmPayload(inscricao, config)),
+      redirect: 'error',
       signal: controller.signal,
     })
     if (!res.ok) {
