@@ -1,8 +1,8 @@
-// Configuração do envio das inscrições.
-// Enquanto SUPABASE_URL estiver vazio, o formulário roda em modo de teste:
-// valida, mostra a tela de sucesso e só registra os dados no console.
+// Endereço do backend de pré-inscrição (BACK END/).
+// Dev: npm run dev:api sobe em http://localhost:3004.
+// Produção: https://api-metodo.charaotechub.com
 window.APP_CONFIG = {
-  SUPABASE_URL: '',       // ex.: https://xxxxxxxx.supabase.co
-  SUPABASE_ANON_KEY: '',  // chave pública "anon" (protegida pelas policies RLS)
-  TABELA: 'inscricoes'
+  API_URL: location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+    ? 'http://localhost:3004'
+    : 'https://api-metodo.charaotechub.com'
 };

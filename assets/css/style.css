@@ -339,3 +339,6 @@ button.btn:hover svg { transform: translateX(4px); }
   .success a.btn-ig svg:first-child { width: 24px; height: 24px; flex: none; }
   .success a.btn-ig svg:last-child { display: block; margin-left: auto; }
 }
+
+/* Honeypot anti-bot: fora da tela, nunca preenchido por pessoas */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}

@@ -37,6 +37,7 @@
      'funcionarios', 'problemas', 'aprender', 'dificuldades']
       .forEach(k => { dados[k] = (fd.get(k) || '').toString().trim(); });
     dados.consentimento = document.getElementById('consent').checked;
+    dados.website = (fd.get('website') || '').toString();
     return dados;
   }
   form.addEventListener('input', e => {
@@ -73,6 +74,9 @@
       await window.enviarInscricao(coletarDados());
     } catch (err) {
       console.error(err);
+      erro.textContent = err && err.message && !/^Falha no envio/.test(err.message)
+        ? err.message
+        : 'Não conseguimos enviar agora. Verifique sua conexão e tente de novo.';
       erro.hidden = false;
       btn.disabled = false;
       btn.removeAttribute('aria-busy');

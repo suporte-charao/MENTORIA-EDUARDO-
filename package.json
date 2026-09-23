@@ -3,7 +3,8 @@
   "private": true,
   "description": "Landing de pré-inscrição do Método Charão (site estático)",
   "scripts": {
-    "dev": "live-server --port=8080 --no-css-inject --watch=index.html,assets,favicon.ico"
+    "dev": "live-server --port=8080 --no-css-inject --watch=index.html,assets,favicon.ico",
+    "dev:api": "npm --prefix \"BACK END\" run dev"
   },
   "devDependencies": {
     "live-server": "^1.2.2"
