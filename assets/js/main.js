@@ -74,9 +74,7 @@
       await window.enviarInscricao(coletarDados());
     } catch (err) {
       console.error(err);
-      erro.textContent = err && err.message && !/^Falha no envio/.test(err.message)
-        ? err.message
-        : 'Não conseguimos enviar agora. Verifique sua conexão e tente de novo.';
+      erro.textContent = (err && err.exibir && err.message) ? err.message : 'Não conseguimos enviar agora. Verifique sua conexão e tente de novo.';
       erro.hidden = false;
       btn.disabled = false;
       btn.removeAttribute('aria-busy');
