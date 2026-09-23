@@ -1,65 +1,62 @@
 # Método Charão — Pré-inscrição
 
-Landing page de pré-inscrição do Programa de Aceleração e Implementação do Método Charão.
-Site estático (HTML + CSS + JS, sem build).
+Landing page de pré-inscrição do Programa de Aceleração e Implementação do Método Charão
+(Charão Educacional). Front estático (HTML + CSS + JS, sem build) + backend mínimo que grava
+as inscrições e as encaminha ao CRM Charão Leads.
+
+**Produção:** https://grupocharao.com.br/charaoeducacional/eduardocharao/
+**API:** https://api-metodo.charaotechub.com (VPS, PM2 `metodo-charao-api`)
 
 ## Estrutura
 
 ```
 index.html
 assets/css/style.css
-assets/js/config.js      ← credenciais do Supabase (vazio = modo teste)
-assets/js/inscricao.js   ← único ponto de envio dos dados
+assets/js/config.js      ← endereço da API (dev/produção)
+assets/js/inscricao.js   ← único ponto de envio (POST /api/inscricoes)
 assets/js/main.js        ← máscara, validação, progresso, tela de sucesso
-assets/img/              ← logos e foto (webp)
-supabase/schema.sql      ← tabela + RLS (rodar no Supabase)
+assets/img/              ← logos, foto e og-image
+BACK END/                ← API Express + SQLite + encaminhamento ao CRM (ver README próprio)
 .htaccess                ← HTTPS e cache na Hostinger
+docs/superpowers/        ← spec e plano desta integração
 ```
-
-## Cache
-
-O `.htaccess` guarda CSS e JS por 1 semana no navegador. Ao alterar qualquer arquivo em
-`assets/css` ou `assets/js`, atualize o `?v=` nos links do `index.html` (ex.: `?v=202609221530`),
-senão quem já visitou continua vendo a versão antiga.
 
 ## Rodar localmente
 
-Requer Node.js. Na primeira vez:
-
 ```bash
 npm install
+cd "BACK END" && npm install && cp .env.example .env && cd ..   # CRM_FORWARD_ENABLED=false em dev
+npm run dev:api    # API em http://localhost:3004
+npm run dev        # site em http://localhost:8080 (recarrega ao salvar)
 ```
 
-Depois:
+Se o live-server abrir em outra porta, inclua-a em `CORS_ORIGIN` do `BACK END/.env`.
 
-```bash
-npm run dev
-```
+## Cache
 
-Abre http://localhost:8080 e recarrega a página sozinho a cada arquivo salvo.
-O `package.json` serve só para o ambiente de desenvolvimento; o site publicado continua sendo HTML/CSS/JS puros (não subir `node_modules/`). Sem Supabase configurado, o envio só aparece no console do navegador.
+O `.htaccess` guarda CSS e JS por 1 semana. Ao alterar `assets/css` ou `assets/js`, atualize o
+`?v=` nos links do `index.html` (ex.: `?v=202609222000`).
 
-## Ligar o Supabase
+## Fluxo do lead
 
-1. Rode `supabase/schema.sql` no SQL Editor do projeto.
-2. Preencha `SUPABASE_URL` e `SUPABASE_ANON_KEY` em `assets/js/config.js`.
+Form → `POST /api/inscricoes` → grava no SQLite → encaminha ao webhook do CRM
+(`origemLead = "Método Charão Eduardo"`, questionário nas notas). Lead aparece em
+**Meus Leads** filtrável pela Fonte. Falha no CRM não afeta o visitante; ver `BACK END/README.md`.
 
-A chave anon é pública por natureza; a policy RLS só permite inserir, nunca ler.
+## Publicar
 
-## Publicar na Hostinger
+1. **Backend na VPS** — roteiro em `BACK END/README.md` (PM2 + nginx + certbot + DNS).
+2. **Front na Hostinger** — enviar `index.html`, `assets/`, `favicon.ico` e `.htaccess` para
+   `public_html/charaoeducacional/eduardocharao/` do site grupocharao.com.br.
+   Não enviar `BACK END/`, `docs/`, `node_modules/`, `README.md` nem `.git`.
+3. **Site do grupo** — `ctaHref` da Charão Educacional em `src/lib/empresas-data.tsx` aponta
+   para a URL acima (repositório SITE-CHARAO).
 
-Envie o conteúdo da pasta (exceto `supabase/`, `README.md` e `.git`) para `public_html/`
-pelo Gerenciador de Arquivos ou FTP.
+## Checklist de aceite
 
-## Pendências de infraestrutura (dev de backend/deploy)
-
-O front está pronto e funciona em modo teste. Falta:
-
-- [ ] **Supabase:** rodar `supabase/schema.sql` e preencher `SUPABASE_URL` e `SUPABASE_ANON_KEY` em `assets/js/config.js`.
-  Nunca colocar a `service_role` no repositório.
-- [ ] **Domínio:** trocar `og:image` no `<head>` do `index.html` pelo endereço absoluto
-  (`https://<dominio>/assets/img/og-image.jpg`). Sem isso, o link não mostra imagem no WhatsApp.
-- [ ] **Hostinger:** publicar `index.html`, `assets/` e `.htaccess` em `public_html/`
-  (o `.htaccess` força HTTPS e define cache).
-- [ ] **Teste final:** enviar uma inscrição real e conferir a linha na tabela `inscricoes`.
-
+- [ ] `curl https://api-metodo.charaotechub.com/health` responde `ok`.
+- [ ] Inscrição real pela URL de produção → tela de sucesso.
+- [ ] Lead em Meus Leads com Fonte "Método Charão Eduardo" e respostas nas notas.
+- [ ] Segunda inscrição com o mesmo e-mail não duplica (webhook devolve `updated`).
+- [ ] Link compartilhado no WhatsApp mostra a imagem (`og:image`).
+- [ ] Botão "Conheça a Charão Educacional" no site do grupo abre a landing.
