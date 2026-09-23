@@ -24,7 +24,9 @@ npm test
 
 1. Valida e grava em `data/inscricoes.db` (tabela `inscricoes`, coluna `crm_status`).
 2. Encaminha ao CRM (`CRM_WEBHOOK_URL`, header `Authorization: Bearer CRM_WEBHOOK_SECRET`) com
-   `origemLead = "Método Charão Eduardo"`. Questionário completo vai em `notas`.
+   `origemLead = "Método Charão Eduardo"`. `notas` traz todas as respostas do questionário, mas
+   cada resposta longa (problemas/aprender/dificuldades) é cortada em até 550 caracteres — o
+   texto completo continua íntegro no SQLite.
 3. Responde 201 ao visitante mesmo se o CRM falhar. `crm_status` fica `erro` e `crm_erro` guarda o motivo.
 
 Reenviar pendentes: consultar `SELECT id, email, crm_status FROM inscricoes WHERE crm_status <> 'enviado'`
@@ -32,14 +34,27 @@ e repetir o POST manualmente (ver guia `integracao-landing-pages.md` no reposit�
 
 ## Produção (VPS srv1309622)
 
+Deploy roda com usuário não-root (sem sudo além do `mkdir`/`chown` inicial):
+
 ```bash
-sudo mkdir -p /var/www/metodo-charao && cd /var/www/metodo-charao
-git clone https://github.com/suporte-charao/MENTORIA-EDUARDO-.git .
+sudo mkdir -p /var/www/metodo-charao && sudo chown -R $USER:$USER /var/www/metodo-charao
+cd /var/www/metodo-charao
+git clone git@github.com:suporte-charao/MENTORIA-EDUARDO-.git .   # repo privado: use deploy key (ssh) ou GCM
+node -v   # precisa ser >= 20 (better-sqlite3 12 traz binário pronto p/ Node 20/22/24; se compilar, instale build-essential python3)
 cd "BACK END" && npm ci --omit=dev
-cp .env.example .env && nano .env   # PORT=3004, CORS_ORIGIN=https://grupocharao.com.br, CRM_WEBHOOK_SECRET=<mesmo do CRM>
-pm2 start src/index.js --name metodo-charao-api && pm2 save
+cp .env.example .env && nano .env   # PORT=3004, HOST=127.0.0.1, CORS_ORIGIN=https://grupocharao.com.br,https://www.grupocharao.com.br, CRM_WEBHOOK_SECRET=<mesmo do CRM>, NODE_ENV=production
+pm2 start src/index.js --name metodo-charao-api --cwd "/var/www/metodo-charao/BACK END" && pm2 save
 curl -s localhost:3004/health
 ```
+
+**Backup:** `data/inscricoes.db` é a única cópia completa do questionário (as notas enviadas ao
+CRM vêm truncadas por resposta — ver "Fluxo do lead"). Inclua o arquivo na rotina de backup da VPS:
+
+```bash
+sqlite3 data/inscricoes.db ".backup /backup/inscricoes-$(date +%F).db"
+```
+
+ou copie o arquivo com a aplicação parada/ociosa, para evitar copiar em plena escrita.
 
 nginx (`/etc/nginx/sites-available/api-metodo.charaotechub.com`):
 
